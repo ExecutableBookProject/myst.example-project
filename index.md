@@ -5,6 +5,7 @@
 caption: Contents
 maxdepth: 2
 ---
-scalar_dynam-MyST.md
-ar1_processes-MyST.md
+source/scalar_dynam-MyST
+source/ar1_processes-MyST
+source/finite_mark-MySt
 ```
