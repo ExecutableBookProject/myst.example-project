@@ -202,7 +202,7 @@ the process $\{ X_t \}$.
 This Markov process can also be represented as a directed graph, with
 edges labeled by transition probabilities
 
-```{image} ../_static/finite_markov-MyST/hamilton_graph.png
+```{image} _static/finite_markov-MyST/hamilton_graph.png
 ---
 align: center
 ---
@@ -565,7 +565,7 @@ $S \times S$.
 For example, consider the following transition probabilities for wealth
 of a fictitious set of households
 
-```{image} ../_static/finite_markov-MyST/mc_irreducibility1.png
+```{image} _static/finite_markov-MyST/mc_irreducibility1.png
 ---
 align: center
 ---
@@ -602,7 +602,7 @@ mc.is_irreducible
 
 Here\'s a more pessimistic scenario, where the poor are poor forever
 
-```{image} ../_static/finite_markov-MyST/mc_irreducibility2.png
+```{image} _static/finite_markov-MyST/mc_irreducibility2.png
 ---
 align: center
 ---
@@ -643,7 +643,7 @@ predictible way, and aperiodic otherwise.
 
 Here\'s a trivial example with three states
 
-```{image} ../_static/finite_markov-MyST/mc_aperiodicity1.png
+```{image} _static/finite_markov-MyST/mc_aperiodicity1.png
 ---
 align: center
 ---
@@ -677,7 +677,7 @@ For example, the stochastic matrix associated with the transition
 probabilities below is periodic because, for example, state $a$ has
 period 2
 
-```{image} ../_static/finite_markov-MyST/mc_aperiodicity2.png
+```{image} _static/finite_markov-MyST/mc_aperiodicity2.png
 ---
 align: center
 ---
@@ -1097,7 +1097,7 @@ Page and Sergey Brin is known as
 
 To illustrate the idea, consider the following diagram
 
-```{image} ../_static/finite_markov-MyST/web_graph.png
+```{image} _static/finite_markov-MyST/web_graph.png
 ---
 align: center
 ---
