@@ -1,10 +1,10 @@
-# Finite Markov Chains
+# (mc)=Finite Markov Chains
 
 ```{note}
-You can {download}`Download the source file for this page <./finite_markov_md.md>`
+You can {download}`Download the source file for this page <./finite_markov-MyST.md>`
 ```
 
-```{content}
+```{contents}
 ---
 depth: 2
 ---
@@ -13,7 +13,7 @@ depth: 2
 In addition to what's in Anaconda, this lecture will need the following
 libraries:
 
-```{code-block} python
+```{code-block} ipython
 ---
 class: hide-output
 ---
@@ -53,6 +53,8 @@ import matplotlib.pyplot as plt
 ## Definitions
 
 The following concepts are fundamental.
+
+(finite_dp_stoch_mat)=
 
 ### Stochastic Matrices
 
@@ -115,10 +117,10 @@ By construction,
 
 We can view $P$ as a stochastic matrix where
 
-```{math}
+$$
 P_{ij} = P(x_i, x_j)
 \qquad 1 \leq i, j \leq n
-```
+$$
 
 Going the other way, if we take a stochastic matrix $P$, we can generate
 a Markov chain $\{X_t\}$ as follows:
@@ -127,6 +129,8 @@ a Markov chain $\{X_t\}$ as follows:
 -   for each $t = 0, 1, \ldots$, draw $X_{t+1}$ from $P(X_t,\cdot)$
 
 By construction, the resulting process satisfies {math:numref}`mpp`.
+
+(mc_eg1)=
 
 #### Example 1
 
@@ -171,11 +175,13 @@ questions, such as
 
 We\'ll cover such applications below.
 
+(mc_eg2)=
+
 #### Example 2
 
 Using US unemployment data, Hamilton {cite}`Hamilton2005` estimated the stochastic matrix
 
-```{math}
+$$
 P =
     \left(
       \begin{array}{ccc}
@@ -184,7 +190,7 @@ P =
          0 & 0.508 & 0.492
       \end{array}
     \right)
-```
+$$
 
 where
 
@@ -365,6 +371,8 @@ we can use
 mc.simulate_indices(ts_length=4)
 ```
 
+(mc_md)=
+
 ## Marginal Distributions
 
 Suppose that
@@ -386,11 +394,11 @@ Using the [law of total
 probability](https://en.wikipedia.org/wiki/Law_of_total_probability), we
 can decompose the probability that $X_{t+1} = y$ as follows:
 
-```{math}
+$$
 \mathbb P \{X_{t+1} = y \}
    = \sum_{x \in S} \mathbb P \{ X_{t+1} = y \, | \, X_t = x \}
                \cdot \mathbb P \{ X_t = x \}
-```
+$$
 
 In words, to get the probability of being at $y$ tomorrow, we account
 for all ways this can happen and sum their probabilities.
@@ -398,16 +406,19 @@ for all ways this can happen and sum their probabilities.
 Rewriting this statement in terms of marginal and conditional
 probabilities gives
 
+(mc_fdd)=
 
-```{math}
+$$
 \psi_{t+1}(y) = \sum_{x \in S} P(x,y) \psi_t(x)
-```
+$$
 
 There are $n$ such equations, one for each $y \in S$.
 
 If we think of $\psi_{t+1}$ and $\psi_t$ as *row vectors* (as is
 traditional in this literature), these $n$ equations are summarized by
 the matrix expression
+
+(mc_fddv)=
 
 ```{math}
 ---
@@ -424,6 +435,8 @@ By repeating this $m$ times we move forward $m$ steps into the future.
 Hence, iterating on {math:numref}`fin_mc_fr`, the
 expression $\psi_{t+m} = \psi_t P^m$ is also valid --- here $P^m$ is
 the $m$-th power of $P$.
+
+(mc_exfmar)=
 
 As a special case, we see that if $\psi_0$ is the initial distribution
 from which $X_0$ is drawn, then $\psi_0 P^m$ is the distribution of
@@ -446,6 +459,8 @@ label: mdfmc2
 X_t \sim \psi_t \quad \implies \quad X_{t+m} \sim \psi_t P^m
 ```
 
+(finite_mc_mstp)=
+
 ### Multiple Step Transition Probabilities
 
 We know that the probability of transitioning from $x$ to $y$ in one
@@ -466,9 +481,9 @@ row of $P^m$.
 
 In particular
 
-```{math}
+$$
 \mathbb P \{X_{t+m} = y \,|\, X_t = x \} = P^m(x, y) = (x, y) \text{-th element of } P^m
-```
+$$
 
 ### Example: Probability of Recession
 
@@ -484,7 +499,7 @@ $\psi(x)$.
 The probability of being in recession (either mild or severe) in 6
 months time is given by the inner product
 
-```{math}
+$$
 \psi P^6
 \cdot
 \left(
@@ -494,7 +509,9 @@ months time is given by the inner product
      1
   \end{array}
 \right)
-```
+$$
+
+(mc_eg1-1)=
 
 ### Example 2: Cross-Sectional Distributions
 
@@ -547,11 +564,11 @@ Let $P$ be a fixed stochastic matrix.
 Two states $x$ and $y$ are said to **communicate** with each other if
 there exist positive integers $j$ and $k$ such that
 
-```{math}
+$$
 P^j(x, y) > 0
 \quad \text{and} \quad
 P^k(y, x) > 0
-```
+$$
 
 In view of our discussion {ref}`above <finite_mc_mstp>`, this means precisely that
 
@@ -574,7 +591,7 @@ align: center
 We can translate this into a stochastic matrix, putting zeros where
 there\'s no edge between nodes
 
-```{math}
+$$
 P :=
 \left(
   \begin{array}{ccc}
@@ -583,7 +600,7 @@ P :=
      0.1 & 0.1 & 0.8
   \end{array}
 \right)
-```
+$$
 
 It\'s clear from the graph that this stochastic matrix is irreducible:
 we can reach any state from any other state eventually.
@@ -663,9 +680,9 @@ mc.period
 More formally, the **period** of a state $x$ is the greatest common
 divisor of the set of integers
 
-```{math}
+$$
 D(x) := \{j \geq 1 : P^j(x, x) > 0\}
-```
+$$
 
 In the last example, $D(x) = \{3, 6, 9, \ldots\}$ for every state $x$,
 so the period is 3.
@@ -716,14 +733,13 @@ P = np.array([[0.4, 0.6],
 
 Such distributions are called **stationary**, or **invariant**.
 
-::: {#mc_stat_dd}
+(mc_stat_dd)=
+
 Formally, a distribution $\psi^*$ on $S$ is called **stationary** for
 $P$ if $\psi^* = \psi^* P$.
-:::
 
 (This is the same notion of stationarity that we learned about in the
-`lecture on AR(1) processes <ar1_processes>`{.interpreted-text
-role="doc"} applied to a different setting.)
+[lecture on AR(1) processes](ar1_processes) applied to a different setting.)
 
 From this equality, we immediately get $\psi^* = \psi^* P^t$ for all
 $t$.
@@ -766,9 +782,9 @@ opposite of irreducibility.
 
 This gives some intuition for the following fundamental theorem.
 
-::: {#mc_conv_thm}
+(mc_conv_thm)=
+
 **Theorem.** If $P$ is both aperiodic and irreducible, then
-:::
 
 1.  $P$ has exactly one stationary distribution $\psi^*$.
 2.  For any initial distribution $\psi_0$, we have
@@ -801,7 +817,9 @@ corresponds to unemployment (state 0).
 
 Using $\psi^* = \psi^* P$ and a bit of algebra yields
 
-$$p = \frac{\beta}{\alpha + \beta}$$
+$$
+p = \frac{\beta}{\alpha + \beta}
+$$
 
 This is, in some sense, a steady state probability of unemployment ---
 more on interpretation below.
@@ -824,7 +842,9 @@ In fact if $P$ has two distinct stationary distributions $\psi_1,
 \psi_2$ then it has infinitely many, since in this case, as you can
 verify,
 
-$$\psi_3 := \lambda \psi_1 + (1 - \lambda) \psi_2$$
+$$
+\psi_3 := \lambda \psi_1 + (1 - \lambda) \psi_2
+$$
 
 is a stationary distribution for $P$ for any $\lambda \in [0, 1]$.
 
@@ -842,7 +862,7 @@ A suitable algorithm is implemented in
 [QuantEcon.py](http://quantecon.org/quantecon-py) --- the next code
 block illustrates
 
-``` {.sourceCode .python3}
+```python
 P = [[0.4, 0.6], 
      [0.2, 0.8]]
 
@@ -864,7 +884,7 @@ stochastic steady state.
 
 The convergence in the theorem is illustrated in the next figure
 
-``` {.sourceCode .ipython}
+```python
 P = ((0.971, 0.029, 0.000),
      (0.145, 0.778, 0.077),
      (0.000, 0.508, 0.492))
@@ -909,13 +929,20 @@ Here
 
 You might like to try experimenting with different initial conditions.
 
+(ergodicity)=
+
 ## Ergodicity
 
 Under irreducibility, yet another important result obtains: For all
 $x \in S$,
 
-$$\frac{1}{m} \sum_{t = 1}^m \mathbf{1}\{X_t = x\}  \to \psi^*(x)
-    \quad \text{as } m \to \infty$$
+```{math}
+---
+label: llnfmc0
+---
+\frac{1}{m} \sum_{t = 1}^m \mathbf{1}\{X_t = x\}  \to \psi^*(x)
+    \quad \text{as } m \to \infty
+```
 
 Here
 
@@ -926,16 +953,17 @@ Here
 The result tells us that the fraction of time the chain spends at state
 $x$ converges to $\psi^*(x)$ as time goes to infinity.
 
-::: {#new_interp_sd}
+(new_interp_sd)=
+
 This gives us another way to interpret the stationary distribution ---
-provided that the convergence result in `llnfmc0`{.interpreted-text
-role="eq"} is valid.
-:::
+provided that the convergence result in {math:numref}`llnfmc0` is valid.
 
 The convergence in `llnfmc0`{.interpreted-text role="eq"} is a special
 case of a law of large numbers result for Markov chains --- see
 [EDTC](http://johnstachurski.net/edtc.html), section 4.3.4 for some
 additional information.
+
+(mc_eg1-2)=
 
 ### Example
 
@@ -947,7 +975,9 @@ irreducibility and aperiodicity both hold.
 
 We saw that the stationary distribution is $(p, 1-p)$, where
 
-$$p = \frac{\beta}{\alpha + \beta}$$
+$$
+p = \frac{\beta}{\alpha + \beta}
+$$
 
 In the cross-sectional interpretation, this is the fraction of people
 unemployed.
@@ -960,15 +990,27 @@ time-series averages for a given person coincide.
 
 This is one interpretation of the notion of ergodicity.
 
+(finite_mc_expec)=
+
 ## Computing Expectations
 
 We are interested in computing expectations of the form
 
-$$\mathbb E [ h(X_t) ]$$
+```{math}
+---
+label: mc_une
+---
+\mathbb E [ h(X_t) ]
+```
 
 and conditional expectations such as
 
-$$\mathbb E [ h(X_{t + k})  \mid X_t = x]$$
+```{math}
+---
+label: mc_cce
+---
+\mathbb E [ h(X_{t + k})  \mid X_t = x]
+```
 
 where
 
@@ -977,7 +1019,7 @@ where
 -   $h$ is a given function, which, in expressions involving matrix
     algebra, we\'ll think of as the column vector
 
-$$\begin{aligned}
+$$
 h
 = \left(
 \begin{array}{c}
@@ -986,30 +1028,39 @@ h
     h(x_n)
 \end{array}
   \right)
-\end{aligned}$$
+$$
 
-The unconditional expectation `mc_une`{.interpreted-text role="eq"} is
+The unconditional expectation {math:numref}`mc_une` is
 easy: We just sum over the distribution of $X_t$ to get
 
-$$\mathbb E [ h(X_t) ]
-= \sum_{x \in S} (\psi P^t)(x) h(x)$$
+$$
+\mathbb E [ h(X_t) ]
+= \sum_{x \in S} (\psi P^t)(x) h(x)
+$$
 
 Here $\psi$ is the distribution of $X_0$.
 
 Since $\psi$ and hence $\psi P^t$ are row vectors, we can also write
 this as
 
-$$\mathbb E [ h(X_t) ]
-=  \psi P^t h$$
+$$
+\mathbb E [ h(X_t) ]
+=  \psi P^t h
+$$
 
-For the conditional expectation `mc_cce`{.interpreted-text role="eq"},
+For the conditional expectation {math:numref}`mc_cce`,
 we need to sum over the conditional distribution of $X_{t + k}$ given
 $X_t = x$.
 
 We already know that this is $P^k(x, \cdot)$, so
 
-$$\mathbb E [ h(X_{t + k})  \mid X_t = x]
-= (P^k h)(x)$$
+```{math}
+---
+label: mc_cce2
+----
+\mathbb E [ h(X_{t + k})  \mid X_t = x]
+= (P^k h)(x)
+```
 
 The vector $P^k h$ stores the conditional expectation
 $\mathbb E [ h(X_{t + k})  \mid X_t = x]$ over all $x$.
@@ -1021,21 +1072,27 @@ as $\sum_t \beta^t h(X_t)$.
 
 In view of the preceding discussion, this is
 
-$$\mathbb{E} \left[
+$$
+\mathbb{E} \left[
         \sum_{j=0}^\infty \beta^j h(X_{t+j}) \mid X_t = x
     \right]
-= [(I - \beta P)^{-1} h](x)$$
+= [(I - \beta P)^{-1} h](x)
+$$
 
 where
 
-$$(I - \beta P)^{-1}  = I + \beta P + \beta^2 P^2 + \cdots$$
+$$
+(I - \beta P)^{-1}  = I + \beta P + \beta^2 P^2 + \cdots
+$$
 
 Premultiplication by $(I - \beta P)^{-1}$ amounts to \"applying the
 **resolvent operator**\".
 
 ## Exercises
 
-### Exercise 1 {#mc_ex1}
+(mc_ex1)=
+
+### Exercise 1
 
 According to the discussion {ref}`above <mc_eg1-2>`, if a worker\'s employment dynamics obey the stochastic
 matrix
@@ -1053,12 +1110,16 @@ P
 with $\alpha \in (0,1)$ and $\beta \in (0,1)$, then, in the long-run,
 the fraction of time spent unemployed will be
 
-$$p := \frac{\beta}{\alpha + \beta}$$
+$$
+p := \frac{\beta}{\alpha + \beta}
+$$
 
 In other words, if $\{X_t\}$ represents the Markov chain for employment,
 then $\bar X_m \to p$ as $m \to \infty$, where
 
-$$\bar X_m := \frac{1}{m} \sum_{t = 1}^m \mathbf{1}\{X_t = 0\}$$
+$$
+\bar X_m := \frac{1}{m} \sum_{t = 1}^m \mathbf{1}\{X_t = 0\}
+$$
 
 The exercise is to illustrate this convergence by computing $\bar X_m$
 for large $m$ and checking that it is close to $p$.
@@ -1066,6 +1127,8 @@ for large $m$ and checking that it is close to $p$.
 You will see that this statement is true regardless of the choice of
 initial condition or the values of $\alpha, \beta$, provided both lie in
 $(0, 1)$.
+
+(mc_ex2)=
 
 ### Exercise 2
 
@@ -1132,7 +1195,9 @@ follows.
 Letting $j$ be (the integer index of) a typical page and $r_j$ be its
 ranking, we set
 
-$$r_j = \sum_{i \in L_j} \frac{r_i}{\ell_i}$$
+$$
+r_j = \sum_{i \in L_j} \frac{r_i}{\ell_i}
+$$
 
 where
 
@@ -1154,10 +1219,12 @@ least one link.
 
 With this definition of $P$ we have
 
-$$r_j
+$$
+r_j
 = \sum_{i \in L_j} \frac{r_i}{\ell_i}
 = \sum_{\text{all } i} \mathbf 1\{i \to j\} \frac{r_i}{\ell_i}
-= \sum_{\text{all } i} P(i, j) r_i$$
+= \sum_{\text{all } i} P(i, j) r_i
+$$
 
 Writing $r$ for the row vector of rankings, this becomes $r = r P$.
 
@@ -1195,7 +1262,7 @@ the last named `n`.
 
 A typical line from the file has the form
 
-``` {.sourceCode .none}
+```
 d -> h;
 ```
 
@@ -1208,17 +1275,19 @@ To parse this file and extract the relevant information, you can use
 The following code snippet provides a hint as to how you can go about
 this
 
-``` {.sourceCode .python3}
+```python
 import re
 re.findall('\w', 'x +++ y ****** z')  # \w matches alphanumerics
 ```
 
-``` {.sourceCode .python3}
+```python
 re.findall('\w', 'a ^^ b &&& $$ c')
 ```
 
 When you solve for the ranking, you will find that the highest ranked
 node is in fact `g`, while the lowest is `a`.
+
+(mc_ex3)=
 
 ### Exercise 3
 
@@ -1228,7 +1297,9 @@ model with a discrete one.
 In particular, Markov chains are routinely generated as discrete
 approximations to AR(1) processes of the form
 
-$$y_{t+1} = \rho y_t + u_{t+1}$$
+$$
+y_{t+1} = \rho y_t + u_{t+1}
+$$
 
 Here ${u_t}$ is assumed to be IID and $N(0, \sigma_u^2)$.
 
@@ -1266,15 +1337,21 @@ The values $P(x_i, x_j)$ are computed to approximate the AR(1) process
 
 1.  If $j = 0$, then set
 
-$$P(x_i, x_j) = P(x_i, x_0) = F(x_0-\rho x_i + s/2)$$
+$$
+P(x_i, x_j) = P(x_i, x_0) = F(x_0-\rho x_i + s/2)
+$$
 
 2.  If $j = n-1$, then set
 
-$$P(x_i, x_j) = P(x_i, x_{n-1}) = 1 - F(x_{n-1} - \rho x_i - s/2)$$
+$$
+P(x_i, x_j) = P(x_i, x_{n-1}) = 1 - F(x_{n-1} - \rho x_i - s/2)
+$$
 
 3.  Otherwise, set
 
-$$P(x_i, x_j) = F(x_j - \rho x_i + s/2) - F(x_j - \rho x_i - s/2)$$
+$$
+P(x_i, x_j) = F(x_j - \rho x_i + s/2) - F(x_j - \rho x_i - s/2)
+$$
 
 The exercise is to write a function
 `approx_markov(rho, sigma_u, m=3, n=7)` that returns
@@ -1283,7 +1360,7 @@ as described above.
 
 -   Even better, write a function that returns an instance of
     [QuantEcon.py\'s](http://quantecon.org/quantecon-py)
-    [MarkovChain]{.title-ref} class.
+    `MarkovChain` class.
 
 ## Solutions
 
@@ -1296,7 +1373,7 @@ conditions.
 
 As $m$ gets large, both series converge to zero.
 
-``` {.sourceCode .python3}
+```python
 α = β = 0.1
 N = 10000
 p = β / (α + β)
@@ -1331,7 +1408,7 @@ plt.show()
 First, save the data into a file called `web_graph_data.txt` by
 executing the next cell
 
-``` {.sourceCode .ipython}
+``` {code-block} ipython
 %%file web_graph_data.txt
 a -> d;
 a -> f;
@@ -1372,7 +1449,7 @@ n -> j;
 n -> m;
 ```
 
-``` {.sourceCode .python3}
+```python
 """
 Return list of pages, ordered by rank
 """

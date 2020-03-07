@@ -7,5 +7,5 @@ maxdepth: 2
 ---
 scalar_dynam-MyST
 ar1_processes-MyST
-finite_mark-MySt
+finite_markov-MyST
 ```
