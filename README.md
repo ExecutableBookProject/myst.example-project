@@ -25,7 +25,7 @@ FILES=source_rst/*.rst
 for f in $FILES
 
 do
-	s="${f##*/}"                                    # remove path
+	s="${f##*/}"                                         # remove path
 	filename="source/${s%.*}-MyST"                       # remove file suffix
 	echo "Converting $f to $filename.md"
 	`pandoc $f -f rst -t markdown -o $filename.md`
@@ -34,10 +34,14 @@ done
 
 ## Work in Progress
 
-- [ ] Decision on MyST footnote reference: update this MyST file `finite_markov-MyST.md`
+- [x] Decision on MyST footnote reference: update this MyST file `finite_markov-MyST.md`
 - [x] Test cross-references: `finite_markov` has a potential test-case @JIT
 - [ ] Comment label in math equation? `%` doesn't work
 - [ ] Math labels are not always present post conversion (this information is not present at all in the document)
+- [ ] Check whether using int footnote produces a bug for `[^1]`
+- [ ] Add space: `[Tau86]George Tauchen.`
+- [ ] References appear after citations by design. Does it make sense?
+- [ ] Remove "\n" from citation because it does not render in MyST
 
 ## rST to Pandoc to MyST
 
@@ -47,9 +51,10 @@ done
 | ``` `P` ```  | `[P]{.title-ref}`  | ``` `P` ```  |
 | ``` `rich` ```  | `[rich]{.title-ref}`  | ``` `rich` ```  |
 | ``` :eq:`fin_mc_fr` ``` | ``` `fin_mc_fr`{.interpreted-text role="eq"} ```  | ``` {math:numref}`fin_mc_fr` ```  |
-| ``` :doc:`lecture on AR(1) processes <ar1_processes>` ``` | ```` `lecture on AR(1) processes <ar1_processes>`{.interpreted-text role="doc"} ```` | `[lecture on AR(1) processes](ar1_processes.md)` |
+| ``` :doc:`lecture on AR(1) processes <ar1_processes>` ``` | ```` `lecture on AR(1) processes <ar1_processes>`{.interpreted-text role="doc"} ```` | `[lecture on AR(1) processes](ar1_processes)` |
+| ``` :cite:`caplin1985variability` ``` | ```` `caplin1985variability`{.interpreted-text role="cite"} ```` | ```` {cite}`caplin1985variability` ```` |
 
-1.  
+1. Also `.. code:: ipython3` > `{.sourceCode .ipython3}`
 ```
 .. code-block:: python3
 
@@ -125,3 +130,147 @@ Even better, write a function that returns an instance of
     [QuantEcon.py\'s](http://quantecon.org/quantecon-py)
     `MarkovChain` class.
 ````
+
+5.
+```
+.. highlight:: python3
+```
+
+```
+::: {.highlight}
+python3
+:::
+```
+
+```
+
+```
+
+6.
+```
+******************
+Inventory Dynamics
+******************
+```
+
+```
+Inventory Dynamics
+==================
+```
+
+```
+# Inventory Dynamics
+```
+
+7.
+```
+************************************
+:index:`Finite Markov Chains`
+************************************
+```
+
+```
+`Finite Markov Chains`{.interpreted-text role="index"}
+======================================================
+```
+
+```
+# Finite Markov Chains
+```
+
+8. 
+```
+.. contents:: :depth: 2
+```
+
+```
+::: {.contents}
+
+depth
+
+:   2
+:::
+```
+
+```{contents}
+---
+depth: 2
+---
+```
+
+9.
+```
+.. include:: /_static/includes/header.raw
+```
+
+```
+
+```
+
+````
+```{note}
+You can {download}`Download the source file for this page <./finite_markov-MyST.md>`
+```
+````
+
+10.
+```
+.. index::
+    single: Markov process, inventory
+```
+
+```
+::: {.index}
+single: Markov process, inventory
+:::
+```
+
+```
+
+```
+
+11.
+````
+We can also approximate the distribution using a `kernel density estimator
+<https://en.wikipedia.org/wiki/Kernel_density_estimation>`__. 
+````
+```
+We can also approximate the distribution using a [kernel density
+estimator
+\<https://en.wikipedia.org/wiki/Kernel\_density\_estimation\>]{.title-ref}\_\_.
+```
+````
+We can also approximate the distribution using a 
+[kernel density estimator](https://en.wikipedia.org/wiki/Kernel_density_estimation/)
+````
+_Note the broken link above._
+
+**HOWEVER**
+````
+We will use a kernel density estimator from `scikit-learn <https://scikit-learn.org/stable/>`__
+````
+
+```
+We will use a kernel density estimator from
+[scikit-learn](https://scikit-learn.org/stable/)
+```
+
+```
+We will use a kernel density estimator from
+[scikit-learn](https://scikit-learn.org/stable/)
+```
+
+**Note**:
+* Don't fully understand what `:index:` means in the lectures...
+
+### To do:
+
+1. rST headings:
+```
+******************
+Inventory Dynamics
+******************
+```
+`=========`   
+`----------`  
+Documentation states that `**********************` or `########` can also be used.
