@@ -9,3 +9,4 @@ MyST: An example project
    scalar_dynam-MyST
    ar1_processes-MyST
    finite_markov-MyST
+   inventory_dynamics-MyST

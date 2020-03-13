@@ -8,4 +8,5 @@ maxdepth: 2
 scalar_dynam-MyST
 ar1_processes-MyST
 finite_markov-MyST
+inventory_dynamics-MyST
 ```
