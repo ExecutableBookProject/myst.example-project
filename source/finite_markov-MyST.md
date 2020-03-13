@@ -67,7 +67,7 @@ matrix $P$ such that
 Each row of $P$ can be regarded as a probability mass function over $n$
 possible outcomes.
 
-It is too not difficult to check[^1] that if $P$ is a stochastic matrix,
+It is too not difficult to check[^2] that if $P$ is a stochastic matrix,
 then so is the $k$-th power $P^k$ for all $k \in \mathbb N$.
 
 ### Markov Chains
@@ -1492,12 +1492,9 @@ A solution from the [QuantEcon.py](http://quantecon.org/quantecon-py)
 library can be found
 [here](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/markov/approximation.py).
 
-**Footnotes**
+**References**
 
-[^1]: Hint: First show that if $P$ and $Q$ are stochastic matrices then
-    so is their product --- to check the row sums, try post
-    multiplying by a column vector of ones. Finally, argue that $P^n$ is
-    a stochastic matrix using induction.
+[^2]: Hint: First show that if $P$ and $Q$ are stochastic matrices then so is their product --- to check the row sums, try post multiplying by a column vector of ones. Finally, argue that $P^n$ is a stochastic matrix using induction.
 
 ```{bibliography} references.bib
 ```
