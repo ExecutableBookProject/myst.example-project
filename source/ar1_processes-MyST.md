@@ -583,5 +583,7 @@ plt.show()
 The simulated distribution approximately coincides with the theoretical
 distribution, as predicted.
 
-```{bibliography} references.bib
+**References**
+
+```{bibliography} ar1_proccesses_references.bib
 ```

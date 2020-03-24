@@ -425,3 +425,8 @@ above.
 Depending on your system, the difference can be substantial.
 
 (On our desktop machine, the speed up is by a factor of 5.)
+
+**References**
+
+```{bibliography} inventory_dynamics_references.bib
+```
