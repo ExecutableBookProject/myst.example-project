@@ -1269,6 +1269,49 @@ d -> h;
 This should be interpreted as meaning that there exists a link from `d`
 to `h`.
 
+The data for this graph is shown below, and read into a file called web_graph_data.txt when the cell is executed.
+
+``` {code-block} ipython
+%%file web_graph_data.txt
+a -> d;
+a -> f;
+b -> j;
+b -> k;
+b -> m;
+c -> c;
+c -> g;
+c -> j;
+c -> m;
+d -> f;
+d -> h;
+d -> k;
+e -> d;
+e -> h;
+e -> l;
+f -> a;
+f -> b;
+f -> j;
+f -> l;
+g -> b;
+g -> j;
+h -> d;
+h -> g;
+h -> l;
+h -> m;
+i -> g;
+i -> h;
+i -> n;
+j -> e;
+j -> i;
+j -> k;
+k -> n;
+l -> m;
+m -> g;
+n -> c;
+n -> j;
+n -> m;
+```
+
 To parse this file and extract the relevant information, you can use
 [regular expressions](https://docs.python.org/3/library/re.html).
 
@@ -1405,50 +1448,6 @@ plt.show()
 
 ### Exercise 2
 
-First, save the data into a file called `web_graph_data.txt` by
-executing the next cell
-
-``` {code-block} ipython
-%%file web_graph_data.txt
-a -> d;
-a -> f;
-b -> j;
-b -> k;
-b -> m;
-c -> c;
-c -> g;
-c -> j;
-c -> m;
-d -> f;
-d -> h;
-d -> k;
-e -> d;
-e -> h;
-e -> l;
-f -> a;
-f -> b;
-f -> j;
-f -> l;
-g -> b;
-g -> j;
-h -> d;
-h -> g;
-h -> l;
-h -> m;
-i -> g;
-i -> h;
-i -> n;
-j -> e;
-j -> i;
-j -> k;
-k -> n;
-l -> m;
-m -> g;
-n -> c;
-n -> j;
-n -> m;
-```
-
 ```python
 """
 Return list of pages, ordered by rank
@@ -1491,8 +1490,6 @@ for name, rank in sorted(ranked_pages.items(), key=itemgetter(1), reverse=1):
 A solution from the [QuantEcon.py](http://quantecon.org/quantecon-py)
 library can be found
 [here](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/markov/approximation.py).
-
-**References**
 
 [^2]: Hint: First show that if $P$ and $Q$ are stochastic matrices then so is their product --- to check the row sums, try post multiplying by a column vector of ones. Finally, argue that $P^n$ is a stochastic matrix using induction.
 
