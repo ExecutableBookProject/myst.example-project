@@ -428,5 +428,6 @@ Depending on your system, the difference can be substantial.
 
 **References**
 
-```{bibliography} inventory_dynamics_references.bib
+```{bibliography} references.bib
+:filter: docname in docnames
 ```

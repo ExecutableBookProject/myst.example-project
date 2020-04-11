@@ -586,5 +586,6 @@ distribution, as predicted.
 
 **References**
 
-```{bibliography} ar1_processes_references.bib
+```{bibliography} references.bib
+:filter: docname in docnames
 ```

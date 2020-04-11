@@ -1497,5 +1497,6 @@ library can be found
 
 [^2]: Hint: First show that if $P$ and $Q$ are stochastic matrices then so is their product --- to check the row sums, try post multiplying by a column vector of ones. Finally, argue that $P^n$ is a stochastic matrix using induction.
 
-```{bibliography} finite_markov_references.bib
+```{bibliography} references.bib
+:filter: docname in docnames
 ```
